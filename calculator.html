@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calc {
+            background: #fff;
+            padding: 32px 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.2);
+            width: 320px;
+            text-align: center;
+        }
+        h2 {
+            color: #4e54c8;
+            margin-bottom: 24px;
+        }
+        input, select {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        input:focus, select:focus {
+            border: 1.5px solid #4e54c8;
+        }
+        button {
+            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+            color: #fff;
+            border: none;
+            padding: 12px 0;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #8f94fb, #4e54c8);
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+            min-height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calc">
+        <h2>Simple Calculator</h2>
+        <input type="number" id="num1" placeholder="First number"><br>
+        <input type="number" id="num2" placeholder="Second number"><br>
+        <select id="operation">
+            <option value="1">Add</option>
+            <option value="2">Subtract</option>
+            <option value="3">Multiply</option>
+            <option value="4">Divide</option>
+        </select><br>
+        <button onclick="calculator()">Calculate</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function calculator() {
+            let choice = document.getElementById('operation').value;
+            let num1 = parseFloat(document.getElementById('num1').value);
+            let num2 = parseFloat(document.getElementById('num2').value);
+            let result = "";
+
+            if (isNaN(num1) || isNaN(num2)) {
+                result = "Please enter valid numbers.";
+            } else {
+                if (choice === '1') {
+                    result = `${num1} + ${num2} = <b>${num1 + num2}</b>`;
+                } else if (choice === '2') {
+                    result = `${num1} - ${num2} = <b>${num1 - num2}</b>`;
+                } else if (choice === '3') {
+                    result = `${num1} * ${num2} = <b>${num1 * num2}</b>`;
+                } else if (choice === '4') {
+                    if (num2 !== 0) {
+                        result = `${num1} / ${num2} = <b>${num1 / num2}</b>`;
+                    } else {
+                        result = "<span style='color:#e74c3c;'>Error: Division by zero is not allowed.</span>";
+                    }
+                } else {
+                    result = "Invalid input.";
+                }
+            }
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+</body>
+</html>
